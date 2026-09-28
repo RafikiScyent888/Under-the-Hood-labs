@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Under the Hood Labs — Cyber Warrior Program</title>
+<meta name="description" content="Big, hands-on builds for A+, Security+ and CySA+. You open it up, run it, see what it is actually doing, and live with what you chose. Part of the Cyber Warrior Program.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23ff6a00'/%3E%3Cpath d='M20.5 6.5a5.5 5.5 0 0 0-5.2 7.3L7 22.1 9.9 25l8.3-8.3a5.5 5.5 0 0 0 7.3-5.2l-3 3-3.2-.8-.8-3.2z' fill='%2316192e'/%3E%3C/svg%3E">
+<style>
+  :root {
+    --royal-blue-deep: #0f1f4d;
+    --royal-blue: #1e3a8a;
+    /* Stopped deeper than the old #2f4fb0, as on the Interactive Labs page:
+       white text on that stop measures 6.85:1, under the 7:1 floor. */
+    --royal-blue-light: #1b3068;
+    /* Safety orange, the owner's pick of three bright oranges (28 September
+       2026). Orange is outside the royal six, so it was shown as a preview
+       first. It is BRIGHT, so it carries DARK text: white on it measures
+       2.68:1, nowhere near any floor. Navy on it measures 6.03:1 against the
+       4.5:1 large-text floor its 20px bold heading needs. */
+    --royal-orange: #ff6a00;
+    --text-light: #f5f7ff;
+    --text-dark: #16192e;
+    --card-bg-alpha: rgba(255,255,255,0.06);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: linear-gradient(160deg, var(--royal-blue-deep) 0%, var(--royal-blue) 55%, var(--royal-blue-light) 100%);
+    color: var(--text-light);
+    line-height: 1.5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  header {
+    text-align: center;
+    padding: 2.5rem 1rem 1.5rem;
+  }
+
+  header h1 {
+    margin: 0;
+    font-size: clamp(1.6rem, 5vw, 2.4rem);
+    letter-spacing: 0.02em;
+  }
+
+  header p.tagline {
+    margin: 0.5rem auto 0;
+    max-width: 32rem;
+    font-size: clamp(0.9rem, 2.5vw, 1.05rem);
+  }
+
+  main {
+    width: 100%;
+    max-width: 34rem;
+    padding: 0 1rem 3rem;
+  }
+
+  .tile {
+    border-radius: 1rem;
+    background: var(--card-bg-alpha);
+    border: 1px solid rgba(255,255,255,0.12);
+    overflow: hidden;
+  }
+
+  .tile-header {
+    padding: 1rem 1.25rem;
+    background: var(--royal-orange);
+    color: var(--text-dark);
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+
+  .tile-body { padding: 1.1rem 1.25rem 1.25rem; }
+
+  .links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .links a {
+    display: block;
+    padding: 0.8rem 1rem;
+    border-radius: 0.55rem;
+    background: rgba(255,255,255,0.06);
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 1rem;
+    transition: background 0.15s ease, transform 0.15s ease;
+  }
+
+  /* Hover DARKENS rather than lightens, as on the sibling pages: a white wash
+     would lift the plate back over the contrast floor exactly when someone is
+     reading it. The outline carries the affordance, not colour alone. */
+  .links a:hover, .links a:focus-visible {
+    background: rgba(6,12,34,0.45);
+    outline: 2px solid rgba(255,255,255,0.75);
+    outline-offset: -2px;
+    transform: translateX(2px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .links a { transition: none; }
+    .links a:hover, .links a:focus-visible { transform: none; }
+  }
+
+  /* The order is the owner's, and it is the order to take them in: A+,
+     then Security+, then CySA+. The number says so in words as well as
+     position. */
+  .step {
+    display: inline-block;
+    margin-right: 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    padding: 0.05rem 0.5rem;
+    vertical-align: 0.1em;
+  }
+
+  /* None of the three names says what the lab is, so each one says it
+     rather than making a student click to find out. */
+  .what {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.85rem;
+    line-height: 1.45;
+  }
+
+  footer {
+    text-align: center;
+    padding: 0 1rem 2.5rem;
+    font-size: 0.82rem;
+    max-width: 32rem;
+    margin: 0 auto;
+  }
+
+  footer .disclaimer {
+    border-top: 1px solid rgba(255,255,255,0.2);
+    padding-top: 1.1rem;
+    margin-top: 0.5rem;
+  }
+
+  @media (max-width: 480px) {
+    header { padding: 1.75rem 1rem 1rem; }
+    main { padding: 0 0.75rem 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1><span aria-hidden="true">🔧</span> Under the Hood Labs</h1>
+  <p class="tagline">Big, hands-on builds. You open it up, run it, see what it is actually doing, and live with what you chose.</p>
+</header>
+
+<main>
+  <section class="tile" aria-labelledby="tile-title">
+    <div class="tile-header" id="tile-title">Under the Hood Labs</div>
+    <div class="tile-body">
+      <ol class="links" aria-label="The labs, in the order to take them">
+        <li>
+          <a href="https://rafikiscyent888.github.io/A-Core-1-under-the-hood-labs/" target="_blank" rel="noopener">
+            <span class="step">1</span>A+ Core 1 Under the Hood Labs
+            <span class="what">Eight generated labs for 220-1201: RAID, printers, workstation builds, power, wireless, mobile, networking and displays. The mechanism is the point, and you live with your choices.</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://rafikiscyent888.github.io/Security-Start-up-Firewall/" target="_blank" rel="noopener">
+            <span class="step">2</span>Security Start-up Firewall
+            <span class="what">Security+. You inherit a home network somebody set up badly, find out what it is really doing from the log, and fix it. Nothing tells you what&rsquo;s wrong. Five tiers, from the house to a business you run and defend.</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://rafikiscyent888.github.io/Veterans-Overcoming-Odds-SOC/" target="_blank" rel="noopener">
+            <span class="step">3</span>Veterans Overcoming the Odds SOC
+            <span class="what">CySA+ CS0-004. You&rsquo;ve switched seats from owner to analyst: work a live queue across five tiers, from first-shift triage to running an incident.</span>
+          </a>
+        </li>
+      </ol>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="disclaimer">
+    Cyber Warrior Program &mdash; built by an instructor, for students, to make certification study more interactive. For educational purposes only. Not affiliated with, endorsed by, or sponsored by CompTIA&reg;. All trademarks belong to their respective owners.
+  </div>
+</footer>
+
+</body>
+</html>

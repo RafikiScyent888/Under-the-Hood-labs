@@ -1,7 +1,7 @@
 /* =====================================================================
    UNDER THE HOOD LABS — the page, checked the way a student sees it
 
-   1. LINKS     exactly three, in the owner's order, to the right sites,
+   1. LINKS     exactly four, in the owner's order, to the right sites,
                 each opening in a new tab with a description
    2. TILE      safety orange (#ff6a00) carrying DARK text
    3. FOOTER    the full Cyber Warrior Program wording
@@ -25,6 +25,7 @@ const CHROME = process.env.CHROME || "/opt/pw-browsers/chromium-1194/chrome-linu
 
 const EXPECT = [
   ["A+ Core 1 Under the Hood Labs", "https://rafikiscyent888.github.io/A-Core-1-under-the-hood-labs/"],
+  ["A+ Core 2 Under the Hood Labs", "https://rafikiscyent888.github.io/A-Core-2-Under-the-Hood-/"],
   ["Security Start-up Firewall", "https://rafikiscyent888.github.io/Security-Start-up-Firewall/"],
   ["Veterans Overcoming the Odds SOC", "https://rafikiscyent888.github.io/Veterans-Overcoming-Odds-SOC/"],
 ];
@@ -95,7 +96,7 @@ async function run(dir, port) {
       if (vp.name === "desk") {
         /* 1. links */
         const links = await page.$$eval(".links a", as => as.map(a => ({ text: a.childNodes[1] ? a.textContent.replace(/\s+/g, " ").trim() : "", href: a.href, target: a.target, what: !!a.querySelector(".what") })));
-        if (links.length !== 3) fail("links", `found ${links.length} links, expected 3`);
+        if (links.length !== EXPECT.length) fail("links", `found ${links.length} links, expected ${EXPECT.length}`);
         EXPECT.forEach(([name, href], i) => {
           const l = links[i];
           if (!l) return;
@@ -134,6 +135,7 @@ async function run(dir, port) {
 
 const PLANTS = {
   wrongorder: { catches: "links", fn: s => s.replace("rafikiscyent888.github.io/A-Core-1-under-the-hood-labs/", "TMP").replace("rafikiscyent888.github.io/Security-Start-up-Firewall/", "rafikiscyent888.github.io/A-Core-1-under-the-hood-labs/").replace("TMP", "rafikiscyent888.github.io/Security-Start-up-Firewall/") },
+  nocore2: { catches: "links", fn: s => s.replace(/<li>\s*<a href="https:\/\/rafikiscyent888\.github\.io\/A-Core-2-Under-the-Hood-\/"[\s\S]*?<\/li>\s*/, "") },
   whitetext: { catches: "tile", fn: s => s.replace("background: var(--royal-orange);\n    color: var(--text-dark);", "background: var(--royal-orange);\n    color: var(--text-light);") },
   lowcontrast: { catches: "contrast", fn: s => s.replace("  .what {\n", "  .what {\n    color: #8a93b8;\n") },
   hoverwash: { catches: "contrast", fn: s => s.replace("background: rgba(6,12,34,0.45);", "background: rgba(255,255,255,0.55);") },
@@ -158,5 +160,5 @@ if (process.argv.includes("--plant")) {
 } else {
   const fails = await run(ROOT, 8930);
   if (fails.length) { console.log("FAILURES:\n  " + fails.join("\n  ")); process.exit(1); }
-  console.log("Under the Hood Labs: three links in order, orange tile with dark lettering, full footer, AAA on painted pixels on a desk and a phone (at rest and hovered), no sideways scroll.");
+  console.log("Under the Hood Labs: four links in order, orange tile with dark lettering, full footer, AAA on painted pixels on a desk and a phone (at rest and hovered), no sideways scroll.");
 }

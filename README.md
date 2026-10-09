@@ -15,10 +15,11 @@ The order is the owner's, and it is the order to take them in.
 | | Lab | What you do |
 | --- | --- | --- |
 | 1 | [A+ Core 1 Under the Hood Labs](https://rafikiscyent888.github.io/A-Core-1-under-the-hood-labs/) | Eight generated labs for 220-1201: RAID, printers, workstation builds, power, wireless, mobile, networking and displays. The mechanism is the point, and you live with your choices |
-| 2 | [Security Start-up Firewall](https://rafikiscyent888.github.io/Security-Start-up-Firewall/) | Security+. Inherit a home network somebody set up badly, find out what it is really doing from the log, and fix it. Nothing tells you what's wrong. Five tiers, from the house to a business you run and defend |
-| 3 | [Veterans Overcoming the Odds SOC](https://rafikiscyent888.github.io/Veterans-Overcoming-Odds-SOC/) | CySA+ CS0-004. You've switched seats from owner to analyst: work a live queue across five tiers, from first-shift triage to running an incident |
+| 2 | [A+ Core 2 Under the Hood Labs](https://rafikiscyent888.github.io/A-Core-2-Under-the-Hood-/) | 220-1202. The whole screen is your work laptop at Rafiki's IT Services: take Help Desk tickets and fix the office's PCs, phones, routers and mail with Windows' own tools, then see each sim the way the exam shows it |
+| 3 | [Security Start-up Firewall](https://rafikiscyent888.github.io/Security-Start-up-Firewall/) | Security+. Inherit a home network somebody set up badly, find out what it is really doing from the log, and fix it. Nothing tells you what's wrong. Five tiers, from the house to a business you run and defend |
+| 4 | [Veterans Overcoming the Odds SOC](https://rafikiscyent888.github.io/Veterans-Overcoming-Odds-SOC/) | CySA+ CS0-004. You've switched seats from owner to analyst: work a live queue across five tiers, from first-shift triage to running an incident |
 
-Each entry carries a one-line description, because none of the three names says
+Each entry carries a one-line description, because none of the names says
 what the lab is, and a student arriving cold should not have to click to find out.
 
 ## Colour
@@ -54,7 +55,7 @@ scripts, no build step.
 
 ```
 node verify/page.mjs           # links, tile, footer, AAA on painted pixels, phone width
-node verify/page.mjs --plant   # 6 planted mistakes, every one must be caught
+node verify/page.mjs --plant   # 7 planted mistakes, every one must be caught
 ```
 
 Needs Playwright and Chromium.

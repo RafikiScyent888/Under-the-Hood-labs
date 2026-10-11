@@ -1,7 +1,7 @@
 /* =====================================================================
    UNDER THE HOOD LABS — the page, checked the way a student sees it
 
-   1. LINKS     exactly four, in the owner's order, to the right sites,
+   1. LINKS     exactly five, in the owner's order, to the right sites,
                 each opening in a new tab with a description
    2. TILE      safety orange (#ff6a00) carrying DARK text
    3. FOOTER    the full Cyber Warrior Program wording
@@ -26,6 +26,7 @@ const CHROME = process.env.CHROME || "/opt/pw-browsers/chromium-1194/chrome-linu
 const EXPECT = [
   ["A+ Core 1 Under the Hood Labs", "https://rafikiscyent888.github.io/A-Core-1-under-the-hood-labs/"],
   ["A+ Core 2 Under the Hood Labs", "https://rafikiscyent888.github.io/A-Core-2-Under-the-Hood-/"],
+  ["The E4 Mafia Network", "https://rafikiscyent888.github.io/The-E4-Mafia-Network/"],   /* Network+, between A+ Core 2 and Security+: the owner's place for it (9 October 2026) */
   ["Security Start-up Firewall", "https://rafikiscyent888.github.io/Security-Start-up-Firewall/"],
   ["Veterans Overcoming the Odds SOC", "https://rafikiscyent888.github.io/Veterans-Overcoming-Odds-SOC/"],
 ];
@@ -135,6 +136,7 @@ async function run(dir, port) {
 
 const PLANTS = {
   wrongorder: { catches: "links", fn: s => s.replace("rafikiscyent888.github.io/A-Core-1-under-the-hood-labs/", "TMP").replace("rafikiscyent888.github.io/Security-Start-up-Firewall/", "rafikiscyent888.github.io/A-Core-1-under-the-hood-labs/").replace("TMP", "rafikiscyent888.github.io/Security-Start-up-Firewall/") },
+  noe4: { catches: "links", fn: s => s.replace(/<li>\s*<a href="https:\/\/rafikiscyent888\.github\.io\/The-E4-Mafia-Network\/"[\s\S]*?<\/li>\s*/, "") },
   nocore2: { catches: "links", fn: s => s.replace(/<li>\s*<a href="https:\/\/rafikiscyent888\.github\.io\/A-Core-2-Under-the-Hood-\/"[\s\S]*?<\/li>\s*/, "") },
   whitetext: { catches: "tile", fn: s => s.replace("background: var(--royal-orange);\n    color: var(--text-dark);", "background: var(--royal-orange);\n    color: var(--text-light);") },
   lowcontrast: { catches: "contrast", fn: s => s.replace("  .what {\n", "  .what {\n    color: #8a93b8;\n") },
@@ -160,5 +162,5 @@ if (process.argv.includes("--plant")) {
 } else {
   const fails = await run(ROOT, 8930);
   if (fails.length) { console.log("FAILURES:\n  " + fails.join("\n  ")); process.exit(1); }
-  console.log("Under the Hood Labs: four links in order, orange tile with dark lettering, full footer, AAA on painted pixels on a desk and a phone (at rest and hovered), no sideways scroll.");
+  console.log("Under the Hood Labs: five links in order, orange tile with dark lettering, full footer, AAA on painted pixels on a desk and a phone (at rest and hovered), no sideways scroll.");
 }
